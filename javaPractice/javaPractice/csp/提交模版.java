@@ -1,4 +1,4 @@
-package 模版;
+package csp;
 
 //这是System.in输入
 
