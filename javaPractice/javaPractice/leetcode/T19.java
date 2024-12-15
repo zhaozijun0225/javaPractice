@@ -1,4 +1,4 @@
-package easyQuestion;
+package leetcode;
 
 public class T19 {
 	public static ListNode test(ListNode head, int n) {

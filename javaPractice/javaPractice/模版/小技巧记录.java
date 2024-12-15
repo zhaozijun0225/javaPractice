@@ -12,3 +12,8 @@ for (int i = 0; i < m; i++) {
     System.arraycopy(values[i], 0, a, i * n, n);
 }
 Arrays.sort(a);
+
+
+//setAll方法，快速初始化
+Arrays.setAll(ids, i -> i);
+Arrays.sort(ids, (a, b) -> Long.compare(op[a], op[b]));

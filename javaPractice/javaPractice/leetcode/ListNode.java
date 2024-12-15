@@ -1,4 +1,4 @@
-package easyQuestion;
+package leetcode;
 
 public class ListNode {
 	int val;

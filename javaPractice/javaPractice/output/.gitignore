@@ -1,4 +1,9 @@
-/hardQuestion/
+/.classpath
+/.project
+/.settings/
 /csp/
-/模版/
 /easyQuestion/
+/hardQuestion/
+/lanqiaobei/
+/模版/
+/leetcode/

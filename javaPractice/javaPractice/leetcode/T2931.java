@@ -1,4 +1,4 @@
-package hardQuestion;
+package leetcode;
 
 import java.util.Iterator;
 
