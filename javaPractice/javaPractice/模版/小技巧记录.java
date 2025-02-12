@@ -1,5 +1,8 @@
 package 模版;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.lang.reflect.InaccessibleObjectException;
 import java.util.Arrays;
 
 public class 小技巧记录 {
@@ -20,3 +23,12 @@ Arrays.sort(a);
 Arrays.setAll(ids, i -> i);
 Arrays.fill(ans, -1);
 Arrays.sort(ids, (a, b) -> Long.compare(op[a], op[b]));
+
+
+//判断结尾的方法，如果是非EOF符号则将结束符号作为hasNext的参数
+while(sc.hasNextInt());
+
+
+//输入
+Scanner cin = new Scanner(new BufferedInputStream(System.in));
+

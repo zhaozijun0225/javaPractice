@@ -23,6 +23,7 @@ public class Main_Test {
   public void run(String filename) throws FileNotFoundException {
       File file = new File(filename);
       Scanner sc = new Scanner(file);
+//      Scanner cin = new Scanner(new BufferedInputStream(System.in));
       
       //在此输入您的代码...
       sc.close();

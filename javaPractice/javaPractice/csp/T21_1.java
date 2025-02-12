@@ -11,12 +11,28 @@ public class T21_1 {
       File file = new File(filename);
       Scanner sc = new Scanner(file);
       
-      //在此输入您的代码...
+      int n=sc.nextInt();
+      int sum=0;
+      for (int i = 0; i < n; i++) {
+		sum+=sc.nextInt()*sc.nextInt();
+		
+		
+	}s
+      
+      
+      
+      System.out.println(sum);
+      
       sc.close();
   }
 
 
   public static void main(String[] args) throws FileNotFoundException {
-      new T21_1().run("eg1.txt");
+      new T21_1().run("./csp/eg1.in");
+      
   }
 }
+
+
+
+ 
