@@ -17,7 +17,7 @@ public class T21_1 {
 		sum+=sc.nextInt()*sc.nextInt();
 		
 		
-	}s
+	}
       
       
       
@@ -28,7 +28,7 @@ public class T21_1 {
 
 
   public static void main(String[] args) throws FileNotFoundException {
-      new T21_1().run("./csp/eg1.in");
+      new T21_1().run("./csp/eg1.txt");
       
   }
 }

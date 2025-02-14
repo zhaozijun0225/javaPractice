@@ -17,7 +17,6 @@ Arrays.sort(arr, (a, b) -> {
 //
 Arrays.sort(arr, new compa());
 class compa implements Comparator<Integer>{
-
     @Override
     public int compare(Integer o1, Integer o2) {
     	// A.compareTo(B) A>B 返回1，A=B 返回0，A<B 返回-1
