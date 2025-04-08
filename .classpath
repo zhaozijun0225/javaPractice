@@ -2,6 +2,5 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry excluding="模版/" kind="src" path="javaPractice"/>
-	<classpathentry kind="src" path="javaPractice/模版"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
