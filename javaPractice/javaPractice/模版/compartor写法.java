@@ -15,6 +15,9 @@ Arrays.sort(arr, (a, b) -> {
 });
 
 //
+
+import java.util.Comparator;
+
 Arrays.sort(arr, new compa());
 class compa implements Comparator<Integer>{
     @Override

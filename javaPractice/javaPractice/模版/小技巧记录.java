@@ -32,3 +32,7 @@ while(sc.hasNextInt());
 //输入
 Scanner cin = new Scanner(new BufferedInputStream(System.in));
 
+
+//栈推荐用deque
+
+
