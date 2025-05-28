@@ -36,3 +36,13 @@ Scanner cin = new Scanner(new BufferedInputStream(System.in));
 //栈推荐用deque
 
 
+//只取前2个数，后面的单独作为一个字符串：
+String input = "12   34  56 786786";
+//用\\s+正则表达式匹配，否则按空格匹配会在“   ”时产生空字符串
+String[] sp=input.split("\\s+",3);
+//字符串转数
+int n = Integer.parseInt(br.readLine().trim());
+//取其中部分字符串
+String depName = token.substring(1);
+
+
