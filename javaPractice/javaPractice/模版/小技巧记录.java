@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.InaccessibleObjectException;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class 小技巧记录 {
 
@@ -44,5 +45,17 @@ String[] sp=input.split("\\s+",3);
 int n = Integer.parseInt(br.readLine().trim());
 //取其中部分字符串
 String depName = token.substring(1);
+
+
+
+//快读流 tokenizer解析每次从br取的“一行”
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+StringTokenizer st = new StringTokenizer(br.readLine());
+int n = Integer.parseInt(st.nextToken());
+long[] A = new long[n];
+for (int i = 0; i < n; i++) {
+    st = new StringTokenizer(br.readLine());
+    A[i] = Long.parseLong(st.nextToken());
+}
 
 
