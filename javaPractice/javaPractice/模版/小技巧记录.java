@@ -46,6 +46,8 @@ int n = Integer.parseInt(br.readLine().trim());
 //取其中部分字符串
 String depName = token.substring(1);
 
+//拼接字符串，仅两个推荐concat，多个推荐StringBUilder(用setLength清空)
+
 
 
 //快读流 tokenizer解析每次从br取的“一行”
@@ -57,5 +59,8 @@ for (int i = 0; i < n; i++) {
     st = new StringTokenizer(br.readLine());
     A[i] = Long.parseLong(st.nextToken());
 }
+
+//用L表示大的数
+Long a = 777777777777L;
 
 
