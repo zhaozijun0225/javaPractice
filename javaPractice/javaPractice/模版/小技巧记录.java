@@ -46,7 +46,10 @@ int n = Integer.parseInt(br.readLine().trim());
 //取其中部分字符串
 String depName = token.substring(1);
 
-//拼接字符串，仅两个推荐concat，多个推荐StringBUilder(用setLength清空)
+//拼接字符串，仅两个推荐concat，多个推荐StringBuilder(用setLength清空)(append\insert\delete\deleteCharAt\setLength\replace\reverse)
+//多次添加单个字符，可以先构造一个stringBuilder，用append和deleteCharAt
+
+
 
 
 
@@ -63,4 +66,11 @@ for (int i = 0; i < n; i++) {
 //用L表示大的数
 Long a = 777777777777L;
 
+//枚举字符串：
+//至少有一个1在字符串，枚举字符串的情况
+//简单枚举：枚举1第一次出现的位置，保证位置前面没有1（或者最后一次出现）
+//枚举csp和ccfpark在串中至少出现一次，（2个分别在前、后）有多少种可能？
+//简单枚举：枚举csp第一次出现的位置和ccfpark最后一次出现的位置，保证csp前没有csp，ccfpark后面没有ccfpark
+//长度很长时：dp，假设字符串正则表达式为*ccf*cspark*，设dp[i][j]表示到串的第i位，匹配了正则表达式的第j位的数量，最后统计dp[n-1][10]+dp[n-1][11]
+//更高级的做法：转移矩阵优化dp+矩阵快速幂，把dp数组看作一个列向量，每次变换相当于左乘了一个转移矩阵，对于连续n次递推，相当于转移矩阵的n次幂乘dp[0],如果有特殊情况，相当于连乘
 

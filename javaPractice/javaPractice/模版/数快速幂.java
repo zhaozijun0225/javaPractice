@@ -1,5 +1,5 @@
 package 模版;
-
+// ans = a^b
 public class 数快速幂 {
     public static long pow3(int a, int b){
         long ans = 1;
