@@ -22,14 +22,19 @@ public class T148 {
 
     public static void main(String[] args) {
         ListNode head = new ListNode(1), tmpHead = head;
-        int[] tmp = {4, 2, 1, 3};
-        for (int i = 0; i < 4; i++) {
-            head.next = new ListNode(tmp[i]);
+        int[] tmp = {-1, 5, 3, 4, 0};
+        for (int i = 0; i < 5; i++) {
+            tmpHead.next = new ListNode(tmp[i]);
+            tmpHead = tmpHead.next;
         }
-        head = tmpHead.next;
+        head = head.next;
+
+        if (head == null)
+//            return head;
+            return;
 
 
-        ListNode Node1 = head, Node2, Node3, rNode = new ListNode(1), endNode;
+        ListNode Node1 = head, Node2, Node3, endNode, curr, merged, prev;
         int maxVal, sortLen = 1, totalLen = 0, cnt = 0;
         while (Node1 != null) {
             totalLen++;
@@ -37,68 +42,109 @@ public class T148 {
         }
 
         Node1 = new ListNode(1);
-        while (sortLen < totalLen) {
-            Node1.next = head;
+        Node1.next = head;
+        for (sortLen = 1; sortLen < totalLen; sortLen <<= 1) {
+            curr = Node1.next;
+            prev = Node1;
+            while (curr != null) {
 
-            while (Node1 != null && Node1.next != null) {
-
-                Node2 = Node1;
-                for (cnt = 0; cnt < sortLen; cnt++) {
-                    Node2 = Node2.next;
-                    if (Node2.next == null)
-                        break;
+                Node2 = curr;
+                for (cnt = 1; cnt < sortLen && curr.next != null; cnt++) {
+                    curr = curr.next;
                 }
-                if (cnt != sortLen) {
-                    Node1 = Node2;
+                if (cnt != sortLen){
+                    prev.next = Node2;
                     break;
                 }
-                Node3 = Node2;
-                for (cnt = 0; cnt < sortLen; cnt++) {
-                    Node3 = Node3.next;
-                    if (Node3.next == null)
-                        break;
+
+
+                Node3 = curr.next;
+                curr.next = null;
+                curr = Node3;
+
+                for (cnt = 1; cnt < sortLen && curr != null && curr.next != null; cnt++) {
+                    curr = curr.next;
+                }
+                endNode = null;
+                if (curr != null) {
+                    endNode = curr.next;
+                    curr.next = null;
                 }
 
-                Node3 = Node3.next;
-                mergeHead(Node1, Node2, rNode, Node3);
-                Node1.next = rNode
+                merged = mergeHead(Node2, Node3);
+                prev.next = merged;
+                while (prev.next != null)
+                    prev = prev.next;
 
-                Node1 = Node3;
+                curr = endNode;
             }
 
-
-            sortLen *= 2;
         }
 
-
+//        return Node1.next;
+        return;
     }
 
 
-    static void mergeHead(ListNode head1, ListNode head2, ListNode rNode, ListNode Node3) {
+    static ListNode mergeHead(ListNode head1, ListNode head2) {
+        ListNode dummyHead = new ListNode(1), tmp1 = head1, tmp2 = head2,tmp = dummyHead;
 
-        ListNode tmpNode1 = head1,tmpNode2 = head2;
-        while (head1.next != null && head2.next != null && tmpNode1 != head2 && tmpNode2.next != Node3) {
-            if (head1.next.val < head2.next.val) {
-                rNode.next = head1.next;
-                head1 = head1.next;
+        while (tmp1 != null && tmp2 != null) {
+            if (tmp1.val <= tmp2.val) {
+                tmp.next = tmp1;
+                tmp1 = tmp1.next;
             } else {
-                rNode.next = head2.next;
-                head2 = head2.next;
+                tmp.next = tmp2;
+                tmp2 = tmp2.next;
             }
-            rNode = rNode.next;
+            tmp = tmp.next;
+        }
+        if(tmp1 == null){
+            tmp.next = tmp2;
+        }
+        else{
+            tmp.next = tmp1;
         }
 
-        if (head1.next == null || tmpNode1==head2) {
-            rNode.next = head2.next;
-        } else {
-            rNode.next = head1.next;
-        }
-        while(rNode.next!= null){
-            rNode = rNode.next;
-        }
-
-
+    return dummyHead.next;
     }
 
 
 }
+
+
+//另一个奇葩写法
+//看样子是桶排
+//class Solution {
+//    public ListNode sortList(ListNode head) {
+//        int len=0;
+//        ListNode cur=head;
+//        int min=Integer.MAX_VALUE;
+//        int max=Integer.MIN_VALUE;
+//        while(cur!=null){
+//            min=Math.min(min,cur.val);
+//            max=Math.max(max,cur.val);
+//            cur=cur.next;
+//            len++;
+//        }
+//        int[]memo=new int[max-min+1];
+//        cur=head;
+//        while(cur!=null){
+//            memo[cur.val-min]++;
+//            cur=cur.next;
+//
+//        }
+//        cur=head;
+//        int i=0;
+//        while(cur!=null){
+//            while(memo[i]==0){
+//                i++;
+//            }
+//            cur.val=i+min;
+//            memo[i]--;
+//            cur=cur.next;
+//        }
+//        return head;
+//
+//    }
+//}
