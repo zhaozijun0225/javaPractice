@@ -71,7 +71,7 @@ Integer newNums[] = Arrays.stream(nums).boxed().toArray(Integer[]::new);
 
 
 
-//小根堆三种写法
+//大根堆三种写法
 static class MyComp implements Comparator<Integer>{
     @Override
     public int compare(Integer o1, Integer o2) {
