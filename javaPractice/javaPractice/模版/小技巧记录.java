@@ -74,3 +74,8 @@ Long a = 777777777777L;
 //长度很长时：dp，假设字符串正则表达式为*ccf*cspark*，设dp[i][j]表示到串的第i位，匹配了正则表达式的第j位的数量，最后统计dp[n-1][10]+dp[n-1][11]
 //更高级的做法：转移矩阵优化dp+矩阵快速幂，把dp数组看作一个列向量，每次变换相当于左乘了一个转移矩阵，对于连续n次递推，相当于转移矩阵的n次幂乘dp[0],如果有特殊情况，相当于连乘
 
+cnt.merge(s, 1, Integer::sum); // cnt[s]++
+cnt.merge(s, -1, Integer::sum); // cnt[s]-- 恢复现场（撤销 cnt[s]++）
+
+Map.merge //若key s存在，则会调用第三个lambda函数，(oldValue,newValue)->xxxxx;若key s不存在，则直接赋值第二个参数（newValue）
+
