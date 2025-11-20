@@ -1,46 +1,39 @@
 package leetcode;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+//滑动窗口
 public class T239 {
-    static public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
-
-    static int ans = Integer.MIN_VALUE;
-
-    static int search(TreeNode root) {
-        if (root == null)
-            return 0;
-        int l = Math.max(search(root.left),0), r = Math.max(search(root.right),0);
-        ans = Math.max(ans, l + root.val + r);
-
-
-        return Math.max(l + root.val, r + root.val);
-    }
-
-
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(1);
+        int[] nums = new int[]{1, 3, -1, -3, 5, 3, 6, 7};
+        int k = 3;
 
 
-        search(root);
+        int n = nums.length;
+        int[] ans = new int[n - k + 1];
+        Deque<Integer> qe = new ArrayDeque<>(k);
+        int i;
+        for (i = 0; i < k; i++) {
+            while (!qe.isEmpty() && nums[qe.peekLast()] <= nums[i]) {
+                qe.pollLast();
+            }
+            qe.offerLast(i);
 
+        }
+        ans[0] = nums[qe.peekFirst()];
+
+        for (i = k; i < n; i++) {
+            while (!qe.isEmpty() && nums[qe.peekLast()] <= nums[i]) {
+                qe.pollLast();
+            }
+            qe.offerLast(i);
+            while (qe.peekFirst() < i - k + 1) {
+                qe.pollFirst();
+            }
+            ans[i - k + 1] = nums[qe.peekFirst()];
+        }
         return ans;
-
 
     }
 }
