@@ -79,3 +79,15 @@ cnt.merge(s, -1, Integer::sum); // cnt[s]-- 恢复现场（撤销 cnt[s]++）
 
 Map.merge //若key s存在，则会调用第三个lambda函数，(oldValue,newValue)->xxxxx;若key s不存在，则直接赋值第二个参数（newValue）
 
+
+deque方法记录
+返回null/false        抛出异常
+peekLast             getLast
+offerLast            addLast
+
+
+//        System.out.println(1e18 + 0.5 == 1e18);  true  小心浮点数
+
+
+System.arraycopy(src,idx,dst,idx,len);  //数组复制
+int[] a = Arrays.copyOf(src,dstLen); //超出src长度时会补0
