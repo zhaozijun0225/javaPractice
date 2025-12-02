@@ -46,10 +46,22 @@ int n = Integer.parseInt(br.readLine().trim());
 //取其中部分字符串
 String depName = token.substring(1);
 
-//拼接字符串，仅两个推荐concat，多个推荐StringBuilder(用setLength清空)(append\insert\delete\deleteCharAt\setLength\replace\reverse)
+//拼接字符串，仅两个推荐concat，多个推荐StringBuilder(用setLength(0)清空)(append\insert\delete\deleteCharAt\setLength\replace\reverse)
 //多次添加单个字符，可以先构造一个stringBuilder，用append和deleteCharAt
 
 
+// 示例1: 字符'3'在基数5下的数值(如果是十六进制，字符要是大写的)((String)xxx.toUpperCase())
+char c1 = '3';
+int in1 = Character.digit(c1, 5);
+System.out.println("数值为: " + in1); // 输出: 数值为: 3
+
+
+int decimalValue = 10;
+String binaryString = Integer.toBinaryString(decimalValue);  // 将数字转换为二进制字符串
+// 输出结果
+System.out.println(binaryString);  // 输出：1010
+//要注意，这样转是最短优先的！！不一定是四位，不要惯性思维了！
+String.format("%4s", Integer.toBinaryString(decimalValue)).replace(' ', '0');  // 转换为二进制，并确保四位
 
 
 
