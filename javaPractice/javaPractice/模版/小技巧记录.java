@@ -3,6 +3,7 @@ package 模版;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.InaccessibleObjectException;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
@@ -50,17 +51,27 @@ String depName = token.substring(1);
 //多次添加单个字符，可以先构造一个stringBuilder，用append和deleteCharAt
 
 
-// 示例1: 字符'3'在基数5下的数值(如果是十六进制，字符要是大写的)((String)xxx.toUpperCase())
-char c1 = '3';
-int in1 = Character.digit(c1, 5);
-System.out.println("数值为: " + in1); // 输出: 数值为: 3
 
+//读N进制字符串  一定要注意题目给的字符串的进制！！！！！
+String tmp = "010101";
+int tmpInt = Integer.parseInt(tmp,2);
+long tmplong = Long.parseLong(tmp,2);
 
+//读N进制字符
+// 示例1: 字符'3'在基数16下的数值(如果是十六进制，字符要是大写的)((String)xxx.toUpperCase())
+char c1 = 'A';
+int in1 = Character.digit(c1, 16);
+System.out.println("数值为: " + in1); // 输出: 数值为: 10
+
+//输出为二进制字符串,一定要注意题意要求的二进制位数！这里转的都是最短优先的
 int decimalValue = 10;
+String BinaryString2 = Integer.toString(decimalValue,2);//最通用的的写法
 String binaryString = Integer.toBinaryString(decimalValue);  // 将数字转换为二进制字符串
+//转成5进制字符串
+String BinaryString2 = Integer.toString(decimalValue,3);
 // 输出结果
 System.out.println(binaryString);  // 输出：1010
-//要注意，这样转是最短优先的！！不一定是四位，不要惯性思维了！
+//要注意，转的东西都是是最短优先的！！不一定是四位，不要惯性思维了！
 String.format("%4s", Integer.toBinaryString(decimalValue)).replace(' ', '0');  // 转换为二进制，并确保四位
 
 
@@ -74,6 +85,20 @@ for (int i = 0; i < n; i++) {
     st = new StringTokenizer(br.readLine());
     A[i] = Long.parseLong(st.nextToken());
 }
+
+//快速输出 （System.out.print遇到换行符时，会频繁触发flush，也就是强制把缓冲区里的数据刷到操作系统的内核缓冲区，最终通过系统调用写入硬件（如控制台）
+// 每次flush()都会把缓冲区里的 “一行数据” 刷到内核，相当于 “用小勺子频繁舀水”，而不是 “用大桶一次性运水”—— 完全没利用到缓冲区的 “批量优化” 价值。
+//从 Java 程序的用户态到操作系统内核的内核态切换，是非常耗时的操作：
+//每次flush()最终会调用操作系统的write()系统调用；
+//系统调用需要保存当前进程的上下文（寄存器、栈等）、切换特权级、执行内核逻辑，再恢复上下文 —— 这个过程的耗时远大于单纯的内存拷贝。
+//频繁调用println会放大这种开销：比如循环输出 1 万行，就会产生 1 万次系统调用和上下文切换，累积起来性能损耗很明显。
+// 这个会切换用户态内核态，造成开销，很坑！！！！）
+// IO优化：使用PrintWriter减少IO开销
+PrintWriter pw = new PrintWriter(System.out);//可以有第二个参数，指定是否自动刷新缓冲区，默认是false
+pw.printf("%s %s%n", receiver, sender);
+
+
+
 
 //用L表示大的数
 Long a = 777777777777L;
@@ -103,3 +128,27 @@ offerLast            addLast
 
 System.arraycopy(src,idx,dst,idx,len);  //数组复制
 int[] a = Arrays.copyOf(src,dstLen); //超出src长度时会补0
+
+
+
+大整数BigInteger，大浮点数BIgDecimal
+使用方法：https://blog.csdn.net/2302_79730293/article/details/144947000
+BigInteger a = BigInteger.valueOf(1);//转换long时
+BigInteger b = new BigInteger(s,10); //转换数字s时(使用时要注意进制)
+
+
+
+s = String.format("-%11s",s); //左对齐
+s = String.format("%11s",s);  //右对齐
+
+
+java虽然没有unsigned类型，但是有无符号移位>>>
+
+
+
+//%n是格式化占位符，与\n一样，但是%n会由java自己判断当前系统，并作出换行
+//场景	        平台无关表示	            系统特有字符（硬编码风险）
+//格式化输出换行	%n	                    \n / \r\n
+//字符串拼接换行	System.lineSeparator()	\n / \r\n
+//文件路径分隔	File.separator	        \ / /
+//多路径分隔	File.pathSeparator	        ; / :
