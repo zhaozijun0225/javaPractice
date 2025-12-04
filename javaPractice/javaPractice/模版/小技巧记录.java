@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.InaccessibleObjectException;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
@@ -40,7 +41,7 @@ Scanner cin = new Scanner(new BufferedInputStream(System.in));
 
 //只取前2个数，后面的单独作为一个字符串：
 String input = "12   34  56 786786";
-//用\\s+正则表达式匹配，否则按空格匹配会在“   ”时产生空字符串
+//用\\s+正则表达式匹配，否则按空格匹配会在“   ”时(多个空格)产生空字符串
 String[] sp=input.split("\\s+",3);
 //字符串转数
 int n = Integer.parseInt(br.readLine().trim());
@@ -77,9 +78,10 @@ String.format("%4s", Integer.toBinaryString(decimalValue)).replace(' ', '0');  /
 
 
 //快读流 tokenizer解析每次从br取的“一行”
-BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in,, StandardCharsets.UTF_8));
 StringTokenizer st = new StringTokenizer(br.readLine());
 int n = Integer.parseInt(st.nextToken());
+//st那行开始可以用String[] sp=input.split("\\s+");,更优雅
 long[] A = new long[n];
 for (int i = 0; i < n; i++) {
     st = new StringTokenizer(br.readLine());
@@ -151,4 +153,21 @@ java虽然没有unsigned类型，但是有无符号移位>>>
 //格式化输出换行	%n	                    \n / \r\n
 //字符串拼接换行	System.lineSeparator()	\n / \r\n
 //文件路径分隔	File.separator	        \ / /
-//多路径分隔	File.pathSeparator	        ; / :
+//多路径分隔	File.pathSeparator	        ; / :\
+
+
+
+//hashmap有entrySet()\keySet()可以遍历，entry是一个键值对
+//for (Map.Entry<String, Integer> entry : map.entrySet()) {
+//      String k = entry.getKey(); // 键
+//      Integer v = entry.getValue(); // 值
+//      System.out.println("key: " + k + ", value: " + v);
+//        }
+
+
+//        System.out.printf("%-10d",1);   左对齐
+//        System.out.printf("%010d",1);  左补0，与上面那条不能共用
+//        System.out.printf("%-10.3f",1.0);  总长度为10
+
+
+//List除了可以根据下标remove，也可以根据对象remove,但是只会移除第一个出现的

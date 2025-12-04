@@ -2,7 +2,7 @@ package csp;
 import java.io.*;
 import java.util.*;
 
-class T37_3new {
+class T37_3_oldAns {
     static final long MOD = 1000000007;  // 取模常量
 
     // 变量定义类：表示一个变量是静态还是动态、其静态长度、表达式操作数列表、
