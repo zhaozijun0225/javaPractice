@@ -78,7 +78,7 @@ String.format("%4s", Integer.toBinaryString(decimalValue)).replace(' ', '0');  /
 
 
 //快读流 tokenizer解析每次从br取的“一行”
-BufferedReader br = new BufferedReader(new InputStreamReader(System.in,, StandardCharsets.UTF_8));
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 StringTokenizer st = new StringTokenizer(br.readLine());
 int n = Integer.parseInt(st.nextToken());
 //st那行开始可以用String[] sp=input.split("\\s+");,更优雅
