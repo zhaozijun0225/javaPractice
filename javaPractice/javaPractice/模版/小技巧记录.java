@@ -1,11 +1,14 @@
 package 模版;
 
+import csp.T36_3;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.InaccessibleObjectException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.StringTokenizer;
 
 public class 小技巧记录 {
@@ -171,3 +174,13 @@ java虽然没有unsigned类型，但是有无符号移位>>>
 
 
 //List除了可以根据下标remove，也可以根据对象remove,但是只会移除第一个出现的
+
+//错误代码示范：
+cacheGroup[] = new cacheGroup[n];
+for (T36_3.cacheGroup cg : cgArr) {
+cg = new cacheGroup();}
+//增强型循环是创建一个副本，并把数组的一个值赋给副本，修改只会在副本上修改！！这个代码会创建一个指针副本，赋值给了指针副本，没有给到每个数组的真正指针！！！！
+
+
+//实现LRU（最少最近使用），可以用linkedHashMap，增删改查都是O(1),accessOrder标志位设为true（false只考虑插入顺序）
+LinkedHashMap<Integer, T36_3.cacheBlock> lhm = new LinkedHashMap<>(10000,1,true);
