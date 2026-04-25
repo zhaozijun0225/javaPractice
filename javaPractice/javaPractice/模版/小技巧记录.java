@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.InaccessibleObjectException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.StringTokenizer;
@@ -28,6 +29,11 @@ Arrays.sort(a);
 //setAll方法，快速初始化，ids是一个数组
 Arrays.setAll(ids, i -> i);
 Arrays.fill(ans, -1);
+//是对象数组时：（_是参数占位符，表示有一个参数但是不使用）
+ArrayList<Integer>[] bk = new ArrayList[maxCount + 1];
+Arrays.setAll(bk, _ -> new ArrayList<Integer>());
+
+
 Arrays.sort(ids, (a, b) -> Long.compare(op[a], op[b]));
 
 
@@ -53,6 +59,7 @@ String depName = token.substring(1);
 
 //拼接字符串，仅两个推荐concat，多个推荐StringBuilder(用setLength(0)清空)(append\insert\delete\deleteCharAt\setLength\replace\reverse)
 //多次添加单个字符，可以先构造一个stringBuilder，用append和deleteCharAt
+//StringBuffer与StringBuilder一样，但是Buffer线程安全
 
 
 

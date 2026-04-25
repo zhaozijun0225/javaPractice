@@ -1,52 +1,43 @@
 package leetcode;
 
 public class T4 {
-    public static void main(String[] args) {
-        int[] nums1 = {1, 3}, nums2 = {2};
 
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n = nums1.length;
+        int m = nums2.length;
 
-        if (nums1.length > nums2.length) {
-            int[] n1 = nums1;
-            nums1 = nums2;
-            nums2 = nums1;
-        }
-        int L1 = nums1.length, L2 = nums2.length;
-        int l = 0, r = L1 - 1, mid = 0;
-        int intTmp1, intTmp2;
-        boolean isFull = false;
-        while (l <= r) {
-            mid = (l + r) / 2;
-
-            intTmp2 = (L1 + L2 - 2 * mid + 1) / 2;
-
-            if (mid == L1 - 1) {
-                isFull = true;
-                break;
-            }
-
-            if (nums1[mid] >= nums2[intTmp2 + 1]) {
-                r = mid - 1;
-            } else {
-                if (nums1[mid + 1] <= nums2[(L1 + L2 - 2 * mid - 1) / 2]) {
-                    l = mid + 1;
-                }
-            }
+        if ((n + m) % 2 == 0) {
+            return (findMid(nums1, 0, n, nums2, 0, m, (m + n) / 2) + findMid(nums1,0, n, nums2,0, m, (m + n) / 2 + 1)) / 2.0;
+        } else {
+            return findMid(nums1, 0, n, nums2, 0, m, (m + n + 1) / 2);
         }
 
-        intTmp1 = (L1 + L2 - 2 * mid + 1) / 2;
-        if((L1+L2) %2==1){
-            if(isFull){
-                return nums2[intTmp1];
-            }else{
-                return Math.max(nums1[mid],nums2[intTmp1]);
-            }
+    }
+
+    private int findMid(int[] nums1, int Astrat, int Aend, int[] nums2, int Bstart, int Bend, int k) {
+        int lenA = Aend - Astrat, lenB = Bend - Bstart;
+        if (lenA == 0)
+            return nums2[Bstart + k - 1];
+        else if (lenB == 0)
+            return nums1[Astrat + k - 1];
+
+        if (k == 1)
+            return Math.min(nums1[Astrat], nums2[Bstart]);
+
+        int tmpI1 = Astrat + Math.min(lenA, k / 2) - 1;
+        int tmpI2 = Bstart + Math.min(lenB, k / 2) - 1;
+        if (nums1[tmpI1] > nums2[tmpI2]) {
+            return findMid(nums1, Astrat, Aend, nums2, tmpI2 + 1, Bend, k - (tmpI2 - Bstart + 1));
         }else{
-            if(isFull){
-                return (nums2[intTmp1]+nums2[intTmp1+1])/2;
-            }else{
-                return (Math.max(nums1[mid],nums2[intTmp1]) + Math.min(nums1[mid+1],nums2[intTmp1+1]))/2;
-            }
+            return findMid(nums1, tmpI1+1, Aend, nums2, Bstart, Bend, k - (tmpI1 - Astrat + 1));
         }
+
+
+    }
+
+
+    public static void main(String[] args) {
+
 
     }
 }
