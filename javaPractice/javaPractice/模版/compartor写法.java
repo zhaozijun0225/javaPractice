@@ -1,3 +1,5 @@
+//数组sort用Arrays.sort
+//集合sort用Collections.sort
 //降序，注意这些写法都是对于封装数据类型的，基础数据类型不能与comparator并用(但是基础数据的指针又可以了（二维数组可以）。Comparator参数仅支持引用类型)
 Arrays.sort(intervals, n new Comparator<Integer>() {
         		//重写compare方法，最好加注解，不加也没事
@@ -14,10 +16,9 @@ Arrays.sort(arr, (a, b) -> {
     return b-a;
 });
 
-//
 
+//比较器对象写法
 import java.util.Comparator;
-
 Arrays.sort(arr, new compa());
 class compa implements Comparator<Integer>{
     @Override
@@ -56,7 +57,7 @@ class Event implements Comparable<Event> {
         }
     }
 }
-
+//对于上面定义的类，如果events是个集合，可以用这个排序：
 Collections.sort(events);
 
 
@@ -92,4 +93,15 @@ PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
 
 //
 PriorityQueue<Integer> queue = new PriorityQueue<>((o1,o2) -> o2 -o1);
+
+
+
+
+//    JAVA如果我想实现按某个值排序，同时得到排序后数组个元素的原始坐标的数组，最优实现方法是什么？
+//    Java 实现数组排序并保留原始下标（最优方案）
+//    核心思路
+//    不直接排序原数组，而是创建一个下标数组 [0,1,2,3...]
+//    用原数组的值作为排序依据，对下标数组进行排序
+//    最终得到的下标数组，就是排序后元素的原始坐标
+//    如果还想知道原数组对应在下标数组（排序数组）的哪个位置，可以得到下标数组后遍历一边下标数组，放到一个新数组里记录原位置->新下标数组位置。
 
