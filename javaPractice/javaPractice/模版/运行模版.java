@@ -3,27 +3,26 @@ package 模版;
 //这是System.in输入
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 public class Main{
-    public void run(){
-//      Scanner sc = new Scanner(System.in);
-//      大批量输入时，使用有缓冲的字节流
-        Scanner cin = new Scanner(new BufferedInputStream(System.in));
+    public void run() throws IOException {
+        PrintWriter pw = new PrintWriter(System.out, false);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 
+        String[] strArr = br.readLine().split("\\s+"); //每次读一行
+        strArr = br.readLine().split("\\s+", 2);  //只把第一个空格当成分隔符（只分两段）
+        int n = Integer.parseInt(strArr[0]);
         //在这里写你的代码
 
 
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(new File("index.out")));
-            bw.write(String.valueOf(12312312));//str表示写入文件的内容
-            bw.flush();//立刻将缓存区的数据写入数据流
-            bw.close();//将BufferedWriter流关闭
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        pw.printf("%d %d\n", 1, 2);
+        br.close();
+        pw.flush();
+        pw.close();
 
     }
+
     public static void main(String[] args){
         new csp.Main().run();
     }
@@ -31,7 +30,7 @@ public class Main{
 
 
 
-//这是自己在本地测试样例时候用的
+//这是自己在本地测试样例时候用的（下面的是老版本，更好的看上面的）
 
 import java.io.*;
 import java.util.*;
