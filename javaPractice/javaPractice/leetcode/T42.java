@@ -7,68 +7,32 @@ import java.util.*;
 import javax.swing.tree.FixedHeightLayoutCache;
 
 public class T42 {
+    public int trap(int[] height) {
+        int n  = height.length;
+        int maxLeft = 0,maxRight = 0;
+        int left = 0,right = n-1;
+        int ans = 0;
 
-	public class box {
-		int height;
-		int idx;
+        while(left<=right){
 
-		public box(int height, int idx) {
-			this.height = height;
-			this.idx = idx;
+            if(height[left]<=height[right]){
+                maxLeft = Math.max(maxLeft,height[left]);
+                ans+=maxLeft-height[left];
+                left++;
+            }else{
+                maxRight = Math.max(maxRight,height[right]);
+                ans+=maxRight-height[right];
+                right--;
+            }
 
-		}
 
-	}
+        }
 
-	public int run(int[] height) throws FileNotFoundException {
-		int max = 0, ans = 0, maxidx = 0, minHeight;
-		box tmp1, lastPollBox;
-		Deque<box> deque = new ArrayDeque<box>();
-//		Deque<box> alreadyDeque = new ArrayDeque<box>();
 
-		for (int idx = 0; idx < height.length; idx++) {
-			if (!deque.isEmpty()) {
-				lastPollBox = null;
-				while (deque.peek().height <= height[idx]) {
-					// 左低，算一行的分
-					tmp1 = deque.poll();
 
-					minHeight = tmp1.height;
 
-					if (lastPollBox != null) {
-						minHeight -= lastPollBox.height;
-					}
 
-					ans += (idx - tmp1.idx - 1) * minHeight;
+        return ans;
+    }
 
-					lastPollBox = tmp1;
-					if (deque.isEmpty()) {
-						break;
-					}
-
-				}
-				if (!deque.isEmpty()) {
-					// 左有高的，算分
-					tmp1 = deque.peek();
-					minHeight = height[idx];
-					if (lastPollBox != null) {
-						minHeight -= lastPollBox.height;
-					}
-					ans += (idx - tmp1.idx - 1) * minHeight;
-
-				}
-
-			}
-			deque.push(new box(height[idx], idx));
-
-		}
-
-		return ans;
-	}
-
-	public static void main(String[] args) throws FileNotFoundException {
-		int ans = new T42().run(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
-
-		System.out.print(ans);
-	}
 }
