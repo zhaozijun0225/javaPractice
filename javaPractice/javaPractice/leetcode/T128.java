@@ -2,43 +2,36 @@ package leetcode;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
-import org.hamcrest.text.IsEmptyString;
 
 public class T128 {
+	public int longestConsecutive(int[] nums) {
+		if(nums.length==0)
+			return 0;
 
-	public int run(int[] nums) throws FileNotFoundException {
-//      File file = new File(filename);
-//      Scanner sc = new Scanner(file);
+		Set<Integer> set = Arrays.stream(nums).boxed().collect(Collectors.toCollection(HashSet::new));
+		int ans = 1,count,tmpInt1;
+		for(int it:set){
 
-		HashSet<Integer> t = new HashSet<Integer>();
+			if(set.contains(it-1))
+				continue;
 
-		for (int i = 0; i < nums.length; i++) {
-			t.add(nums[i]);
-		}
-
-		int ans = 0, tmp1, tmp2;
-
-		for (int num : t) {
-			if (!t.contains(num - 1)) {
-				tmp1 = 1;
-				tmp2 = num;
-				while (t.contains(tmp2 + 1)) {
-					tmp2++;
-					tmp1++;
-				}
-				ans = tmp1 > ans ? tmp1 : ans;
-
+			count = 1;
+			tmpInt1 = it;
+			while(set.contains(tmpInt1+1)){
+				count++;
+				tmpInt1++;
 			}
+			ans = Math.max(ans,count);
+
+
+
+
 
 		}
-
 		return ans;
-//      sc.close();
+
 	}
 
-	public static void main(String[] args) throws FileNotFoundException {
-		int ans = new T128().run(new int[] { 0, 3, 7, 2, 5, 8, 4, 6, 0, 1 });
-		System.out.print(ans);
-	}
 }
