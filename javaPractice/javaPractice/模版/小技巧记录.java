@@ -191,3 +191,10 @@ cg = new cacheGroup();}
 
 //实现LRU（最少最近使用），可以用linkedHashMap，增删改查都是O(1),accessOrder标志位设为true（false只考虑插入顺序）
 LinkedHashMap<Integer, T36_3.cacheBlock> lhm = new LinkedHashMap<>(10000,1,true);
+
+
+//数组equals：比地址，不管内容；
+//HashMap equals：比内容，不管地址；
+//集合类（Map/List/Set）都重写 equals 比内容，数组没有重写，比地址。
+//Java 的 java.util.Arrays 工具类提供了专门比较整型数组元素是否完全相等的方法，会自动逐位置对比，无需手动写循环，是最简洁高效的方案。
+boolean isEqual = Arrays.equals(pCount, cCount);

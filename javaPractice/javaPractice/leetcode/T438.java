@@ -4,52 +4,37 @@ import java.util.*;
 
 public class T438 {
 
-    public List<Integer> run(String s,String p){
-        List<Integer> ans = new ArrayList<>();
-        HashMap<Character, Integer> map = new HashMap<>();
-        for(char c : p.toCharArray()){
-            map.put(c, map.getOrDefault(c, 0) + 1);
+    public List<Integer> findAnagrams(String s, String p) {
+        if(s.length()<p.length())
+            return new ArrayList<>(4);
+        char[] arrS = s.toCharArray(), arrP = p.toCharArray();
+
+
+        int pLen = p.length();
+        List<Integer> ans = new ArrayList<>(30000);
+
+        int[] pCount = new int[26];
+        int[] testCount = new int[26];
+        int r = 0;
+        for (int i = 0; i < pLen; i++) {
+            pCount[arrP[i] - 'a']++;
+            testCount[arrS[r++] - 'a']++;
         }
-        int WSize=p.length();
-        char[] tmpChar=s.toCharArray();
-        int okFlag=map.keySet().size();
+        int left = 0;
+        if (Arrays.equals(pCount, testCount))
+            ans.add(left);
 
-        for(int i=0;i<s.length();i++){
-            if(i>=WSize){
-                if(map.get(tmpChar[i-WSize])==0){
-                    okFlag++;
-                }
-                map.put(tmpChar[i-WSize],map.get(tmpChar[i-WSize])+1);
-                if(map.get(tmpChar[i-WSize])==0){
-                    okFlag--;
-                }
-            }
+        for (;r < s.length(); r++) {
+            testCount[arrS[left++]-'a']--;
+            testCount[arrS[r]-'a']++;
 
-            if(map.getOrDefault(tmpChar[i],0)==0){
-                okFlag++;
-            }
-            map.put(tmpChar[i],map.getOrDefault(tmpChar[i],0)-1);
-            if(map.get(tmpChar[i])==0){
-                okFlag--;
-            }
-            if(okFlag==0){
-                ans.add(i+1-WSize);
-            }
-
-
+            if (Arrays.equals(pCount, testCount))
+                ans.add(left);
 
         }
 
 
         return ans;
-    }
-
-
-    public static void main(String[] args) {
-        List<Integer> ans=new T438().run("cbaebabacd", "abc");
-
-        System.out.println(ans);
-
     }
 
 }
