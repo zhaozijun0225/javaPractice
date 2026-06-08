@@ -125,6 +125,8 @@ Long a = 777777777777L;
 
 cnt.merge(s, 1, Integer::sum); // cnt[s]++
 cnt.merge(s, -1, Integer::sum); // cnt[s]-- 恢复现场（撤销 cnt[s]++）
+map.computeIfPresent("Shoes", (key, value) -> {value-=1;if value==0 return null; else return value;}); //不断减库存，如果为0就删掉这个键值对（返回null）
+
 
 Map.merge //若key s存在，则会调用第三个lambda函数，(oldValue,newValue)->xxxxx;若key s不存在，则直接赋值第二个参数（newValue）
 

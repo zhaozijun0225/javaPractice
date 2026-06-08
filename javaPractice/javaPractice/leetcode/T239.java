@@ -1,39 +1,38 @@
 package leetcode;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
 //滑动窗口
 public class T239 {
-    public static void main(String[] args) {
-        int[] nums = new int[]{1, 3, -1, -3, 5, 3, 6, 7};
-        int k = 3;
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums.length < k)
+            return new int[]{Arrays.stream(nums).max().getAsInt()};
+        Deque<Integer> dq = new ArrayDeque<>();
 
-
-        int n = nums.length;
-        int[] ans = new int[n - k + 1];
-        Deque<Integer> qe = new ArrayDeque<>(k);
-        int i;
-        for (i = 0; i < k; i++) {
-            while (!qe.isEmpty() && nums[qe.peekLast()] <= nums[i]) {
-                qe.pollLast();
+        for (int i = 0; i < k; i++) {
+            while (!dq.isEmpty() && nums[dq.peekLast()] <= nums[i]) {
+                dq.pollLast();
             }
-            qe.offerLast(i);
-
+            dq.offer(i);
         }
-        ans[0] = nums[qe.peekFirst()];
+        int[] ans = new int[nums.length - k + 1];
+        ans[0] = dq.peekFirst();
+        for (int i = k; i < nums.length; i++) {
 
-        for (i = k; i < n; i++) {
-            while (!qe.isEmpty() && nums[qe.peekLast()] <= nums[i]) {
-                qe.pollLast();
+            while (!dq.isEmpty() && nums[dq.peekLast()] <= nums[i]) {
+                dq.pollLast();
             }
-            qe.offerLast(i);
-            while (qe.peekFirst() < i - k + 1) {
-                qe.pollFirst();
+            dq.offer(i);
+            while (!dq.isEmpty() && dq.peekFirst() < i - k + 1) {
+                dq.pollFirst();
+
             }
-            ans[i - k + 1] = nums[qe.peekFirst()];
+            ans[i - k + 1] = nums[dq.peekFirst()];
+
+
         }
         return ans;
+
 
     }
 }

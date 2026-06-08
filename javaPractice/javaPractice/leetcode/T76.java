@@ -3,42 +3,50 @@ package leetcode;
 import java.util.*;
 
 public class T76 {
-    public static void main(String[] args) {
+    static int charToId(char c) {
+        if (c <= 'Z')
+            return c - 'A';
+        else
+            return c - 'a'+26;
 
-        String s = "ADOBECODEBANC", t = "ABC";
+    }
 
-
-        int l = 0, r = 0, n = s.length(), ansLeft = -1, ansRight = n, check = 0;
-        int[] cnt = new int[128];
-        for (char tmp : t.toCharArray()) {
-            if (cnt[tmp] == 0)
-                check++;
-            cnt[tmp]++;
-        }
-
-
-        while (r < s.length()) {
-            cnt[s.charAt(r)]--;
-            if (cnt[s.charAt(r)] == 0)
-                check--;
-
-            while (check == 0) {
-                if (r - l < ansRight - ansLeft) {
-                    ansLeft = l;
-                    ansRight = r;
-                }
-                if (cnt[s.charAt(l)] == 0) {
-                    check++;
-                }
-                cnt[s.charAt(l)]++;
-                l++;
+    public String minWindow(String s, String t) {
+        int ls = s.length(), lt = t.length();
+        int[] diff = new int[52];
+        int diffCnt = 0;
+        for (char c : t.toCharArray()) {
+            int tmpInt = charToId(c);
+            if (diff[tmpInt]++ == 0) {
+                diffCnt++;
             }
-            r++;
+        }
+        int left = 0;
+        int minLen = Integer.MAX_VALUE;
+        String ans = "";
+        char[] sc = s.toCharArray();
+        for (int i = 0; i < sc.length; i++) {
+            if (--diff[charToId(sc[i])] == 0) {
+                diffCnt--;
+            }
+            while (diffCnt == 0) {
+                if(i - left + 1<minLen){
+                    ans = s.substring(left, i + 1);
+                    minLen = i - left + 1;
+                }
+
+
+                if (diff[charToId(sc[left])]++ == 0) {
+                    diffCnt++;
+                }
+                left++;
+            }
+
 
         }
-        return;
-//        return ansLeft == -1 ? "" : s.substring(ansLeft, ansRight);
+        return ans;
 
 
     }
+
 }
