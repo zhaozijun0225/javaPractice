@@ -3,22 +3,19 @@ package leetcode;
 import java.util.*;
 
 public class T238 {
-    public static void main(String[] args) {
-        int[] nums = new int[]{1, 2, 3, 4};
-
-
-        int n = nums.length, i;
-        int[] ans = new int[n];
-        Arrays.fill(ans, 1);
-        int l = nums[0];
-        for (i = 1; i < nums.length; i++) {
-            ans[i] = l;
-            l *= nums[i];
+    public int[] productExceptSelf(int[] nums) {
+        int[] ans = new int[nums.length];
+        int m = 1;
+        ans[0] = 1;
+        for (int i = 1; i < nums.length; i++) {
+            m *= nums[i - 1];
+            ans[i] = m;
         }
-        int R = nums[n - 1];
-        for (i = nums.length - 2; i >= 0; i--) {
-            ans[i] *= R;
-            R *=nums[i];
+        m = 1;
+        for(int i = nums.length-2;i>=0;i--){
+            m *=nums[i+1];
+            ans[i]*=m;
+
 
         }
         return ans;

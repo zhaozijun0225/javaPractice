@@ -200,3 +200,10 @@ LinkedHashMap<Integer, T36_3.cacheBlock> lhm = new LinkedHashMap<>(10000,1,true)
 //集合类（Map/List/Set）都重写 equals 比内容，数组没有重写，比地址。
 //Java 的 java.util.Arrays 工具类提供了专门比较整型数组元素是否完全相等的方法，会自动逐位置对比，无需手动写循环，是最简洁高效的方案。
 boolean isEqual = Arrays.equals(pCount, cCount);
+
+
+//显式指定list.toArray的返回类型，括号里面不写返回的就是object
+// ✅ 正确写法 - 直接返回 int[][]
+int[][] result = ans.toArray(new int[ans.size()][]);
+// ✅ Java 11+ 简化写法，底层会用反射创建个能放得下的新数组
+int[][] result = ans.toArray(new int[0][]);

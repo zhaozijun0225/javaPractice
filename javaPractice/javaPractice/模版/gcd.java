@@ -10,4 +10,8 @@ public class gcd {
         return a;
     }
 
+    public int gcd(int x, int y) {
+        return y > 0 ? gcd(y, x % y) : x;
+    }
+
 }
